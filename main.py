@@ -4,8 +4,8 @@ from test_functions import target_function_value
 from tools import prepare_move, save_plot, generate_gif, removePlots
 
 function = "rastrigin"
-agents = 70
-iterations = 30
+agents = 150
+iterations = 50
 dimensions = 2
 limits = [[-10,10],[-10,10]]
 randomization = 0.5
@@ -41,7 +41,7 @@ def find_opt(test_function,number_of_agents,number_of_iterations,number_of_dimen
                     Agents[index1].move_with_vector(move)
                     Agents[index1].set_brightness(target_function_value(test_function, Agents[index1].coordinates))
         if(save_plots == True):
-            save_plot([a.coordinates for a in Agents],iteration+1,number_of_iterations)
+            save_plot([a.coordinates for a in Agents])
     
     if(make_gif == True):
         generate_gif()

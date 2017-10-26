@@ -61,14 +61,14 @@ def prepare_move(alpha, beta, gamma, coords_attracting, coords_attracted, iterat
     final_move = add_vectors(non_random_move, random_move)
     return final_move
 
-def save_plot(coordinates, iteration, number_of_iterations):
+def save_plot(coordinates):
     import matplotlib.pyplot as plt
     from datetime import datetime
     xs = [item[0] for item in coordinates]
     ys = [item[1] for item in coordinates]
     axes = plt.gca()
-    axes.set_xlim([-6,6])
-    axes.set_ylim([-6,6])
+    axes.set_xlim([-10,10])
+    axes.set_ylim([-10,10])
     plt.scatter(xs,ys)
     file_name = datetime.now().strftime("%Y-%m-%d_%H-%M-%S-%f")
     plt.savefig("plots/" + file_name + ".png")
@@ -84,7 +84,7 @@ def generate_gif():
     for file in files:
         images.append(imageio.imread(file))
     timestr = time.strftime("%Y-%m-%d_%H-%M-%S")
-    imageio.mimsave('gifs/%s.gif' % timestr, images)
+    imageio.mimsave('gifs/%s.gif' % timestr, images, duration = .5)
 
 def removePlots():
     import glob
