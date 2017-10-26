@@ -63,31 +63,45 @@ def prepare_move(alpha, beta, gamma, coords_attracting, coords_attracted, iterat
 
 def save_plot(coordinates, iteration, number_of_iterations):
     import matplotlib.pyplot as plt
+    from datetime import datetime
     xs = [item[0] for item in coordinates]
     ys = [item[1] for item in coordinates]
     axes = plt.gca()
     axes.set_xlim([-6,6])
     axes.set_ylim([-6,6])
     plt.scatter(xs,ys)
-    file_name = build_filename(iteration,number_of_iterations)
+    file_name = datetime.now().strftime("%Y-%m-%d_%H-%M-%S-%f")
     plt.savefig("plots/" + file_name + ".png")
     plt.clf()
-
-def build_filename(number, maxnumber):
-    length_number = len(str(number))
-    length_max = len(str(maxnumber))
-    result = ""
-    for dummy_i in range(length_max - length_number):
-        result += "0"
-    result += str(number)
-    return result
 
 def generate_gif():
     import imageio
     import glob
+    import time
     files = glob.glob("plots/*.png")
     files.sort()
     images = []
     for file in files:
         images.append(imageio.imread(file))
-    imageio.mimsave('gifs/animation.gif', images)
+    timestr = time.strftime("%Y-%m-%d_%H-%M-%S")
+    imageio.mimsave('gifs/%s.gif' % timestr, images)
+
+def removePlots():
+    import glob
+    import os
+
+    plotsPath = "plots/*.png"
+    files = glob.glob(plotsPath)
+
+    for f in files:
+        os.remove(f)
+
+def removeGifs():
+    import glob
+    import os
+
+    plotsPath = "gifs/*.gif"
+    files = glob.glob(plotsPath)
+
+    for f in files:
+        os.remove(f)
