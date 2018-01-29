@@ -17,7 +17,6 @@ class Swarm:
 
     def sort_by_brightness(self):
         "Sorts the swarm by brightness of its agents"
-        from operator import itemgetter
         self.agents.sort(key = lambda x: x.brightness, reverse=True)
         return
 
